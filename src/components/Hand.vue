@@ -1,24 +1,26 @@
 <template>
-  <div
-    class="__hand w-1 h-1/2"
-    :style="{ transformOrigin, transform }"
-  >
-    <div class="absolute bg-black/70 rounded-full left-0 right-0 bottom-0" :style="{ height }">
+  <div class="__hand w-1 h-1/2" :style="{ transformOrigin }">
+    <div
+      class="absolute bg-black/70 rounded-full left-0 right-0 bottom-0"
+      :style="{ height }"
+    />
   </div>
 </template>
 
 <script>
+import { sleep } from '../utils.js';
+import anime from 'animejs/lib/anime.es.js';
 export default {
   name: 'Hand',
-  props: { 
+  props: {
     rotation: {
-      type: Number , 
-      default: 0
-    }, 
+      type: Number,
+      default: 0,
+    },
     height: {
-      type: String , 
-      default: '100%'
-    }
+      type: String,
+      default: '100%',
+    },
   },
   data() {
     return {
@@ -26,17 +28,33 @@ export default {
     };
   },
   computed: {
-    transform() {
-      return `rotate(${this.rotation}deg) translateY(${this.width / 2}px)`;
-    },
     transformOrigin() {
       return '50% bottom';
     },
-
   },
-  mounted() {
+  watch: {
+    rotation(newAngle, oldAngle) {
+      this.rotate([oldAngle, newAngle]);
+    },
+  },
+  async mounted() {
+    await sleep(10);
     this.width = this.$el.offsetWidth;
-    // console.log(this.width);
+    this.rotate([0, this.rotation]);
+  },
+  methods: {
+    async rotate([from, to]) {
+      const directionalTo = to - from < 0 ? 360 + to : to;
+      const rotate = [`${from}deg`, `${directionalTo}deg`];
+      const duration = ((directionalTo - from) / 360) * 2000;
+      const animation = anime({
+        targets: this.$el,
+        easing: 'linear',
+        rotate,
+        duration,
+      });
+      await animation.finished;
+    },
   },
 };
 </script>
