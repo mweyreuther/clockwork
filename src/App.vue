@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="p-10 h-screen grid place-items-center">
-    <div class="__panel border p-4 rounded grid gap-2 shadow-lg">
+  <div id="app" class="p-1 h-screen bg-gray-200 grid place-items-center">
+    <div class="__panel border bg-gray-100 p-4 rounded grid gap-2 shadow-lg">
       <div
         class="__row grid gap-2"
         v-for="(row, i) in panel"
@@ -36,14 +36,14 @@ export default {
     });
     const panel = Array.from({ length: 6 }, (x, i) => [...row]);
     this.panel = panel;
-    setInterval(() => {
-      const row = Array.from({ length: 4 }, (x, i) => {
-        const now = new Date();
-        return `${now.getHours()}:${now.getMinutes()}`;
-      });
-      const panel = Array.from({ length: 6 }, (x, i) => [...row]);
-      this.panel = panel;
-    }, 60000);
+    // setInterval(() => {
+    //   const row = Array.from({ length: 4 }, (x, i) => {
+    //     const now = new Date();
+    //     return `${now.getHours()}:${now.getMinutes()}`;
+    //   });
+    //   const panel = Array.from({ length: 6 }, (x, i) => [...row]);
+    //   this.panel = panel;
+    // }, 60000);
   },
   methods: {
     click([i, ii]) {
@@ -71,3 +71,9 @@ export default {
   },
 };
 </script>
+
+<style>
+html {
+  /* font-size: 40px; */
+}
+</style>

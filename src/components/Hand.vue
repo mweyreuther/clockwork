@@ -1,7 +1,7 @@
 <template>
   <div class="__hand w-1 h-1/2" :style="{ transformOrigin }">
     <div
-      class="absolute bg-black/70 rounded-full left-0 right-0 bottom-0"
+      class="absolute bg-black/80 rounded-t-full left-0 right-0 bottom-0"
       :style="{ height }"
     />
   </div>
