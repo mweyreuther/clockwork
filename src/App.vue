@@ -45,6 +45,19 @@ export default {
         '21:30',
         '21:45',
       ],
+      numbers: [
+        'zero',
+        'one',
+        'two',
+        'three',
+        'four',
+        'five',
+        'six',
+        'seven',
+        'eight',
+        'nine',
+      ],
+      i: 0,
       currenTime: null,
     };
   },
@@ -63,6 +76,10 @@ export default {
     //   const panel = Array.from({ length: 6 }, (x, i) => [...row]);
     //   this.panel = panel;
     // }, 60000);
+    setInterval(() => {
+      this.i = (this.i + 1) % this.numbers.length;
+      this.panel = digits[this.numbers[this.i]];
+    }, 5000);
   },
   methods: {
     click([i, ii]) {
