@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import * as digits from './digits.js';
 import Dial from './components/Dial.vue';
 export default {
   name: 'App',
