@@ -26,11 +26,29 @@ export default {
   data() {
     return {
       panel: [],
+      toggleContent: [
+        '12:00',
+        '12:15',
+        '12:30',
+        '12:45',
+        '15:00',
+        '15:15',
+        '15:30',
+        '15:45',
+        '18:00',
+        '18:15',
+        '18:30',
+        '18:45',
+        '21:00',
+        '21:15',
+        '21:30',
+        '21:45',
+      ],
       currenTime: null,
     };
   },
   mounted() {
-    const row = Array.from({ length: 4 }, (x, i) => {
+    const row = Array.from({ length: 3 }, (x, i) => {
       const now = new Date();
       return `${now.getHours()}:${now.getMinutes()}`;
     });
@@ -47,26 +65,13 @@ export default {
   },
   methods: {
     click([i, ii]) {
-      // this.panel[i][ii] = '14:34';
-      this.panel[2][1] = '15:30';
-      this.panel[2][2] = '21:30';
-      this.panel[3][1] = '12:15';
-      this.panel[3][2] = '21:00';
+      const toggleIndex = this.toggleContent.indexOf(this.panel[i][ii]);
+      this.panel[i][ii] =
+        toggleIndex === -1
+          ? this.toggleContent[0]
+          : this.toggleContent[(toggleIndex + 1) % this.toggleContent.length];
 
-      this.panel[1][0] = '15:30';
-      this.panel[1][1] = '21:15';
-      this.panel[1][2] = '21:15';
-      this.panel[1][3] = '21:30';
-
-      this.panel[2][0] = '12:30';
-      this.panel[3][0] = '12:30';
-      this.panel[2][3] = '12:30';
-      this.panel[3][3] = '12:30';
-
-      this.panel[4][0] = '12:15';
-      this.panel[4][1] = '21:15';
-      this.panel[4][2] = '21:15';
-      this.panel[4][3] = '12:45';
+      console.log(this.panel);
     },
   },
 };
